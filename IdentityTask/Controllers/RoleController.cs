@@ -16,10 +16,10 @@ namespace IdentityTask.Controllers
             _roleService = roleService;
         }
 
-        [HttpPost("{roleName}")]
+        [Route("/AddRole")]
+        [HttpPost]
         public async Task<IActionResult> AddRole(string roleName)
         {
-            // Add the role to the system
             var result = await _roleService.AddRoleAsync(roleName);
             if (result)
             {
@@ -29,6 +29,13 @@ namespace IdentityTask.Controllers
             {
                 return BadRequest("Failed to add role");
             }
+        }
+
+        [Route("/GetRoles")]
+        [HttpGet]
+        public IActionResult GetRoles()
+        {
+            return Ok(_roleService.GetRoles());
         }
     }
 }

@@ -15,19 +15,20 @@ namespace IdentityTask.Services.Concrete
 
         public async Task<bool> AddRoleAsync(string roleName)
         {
-            // Check if the role already exists
             if (await _roleManager.RoleExistsAsync(roleName))
             {
-                return false; // Role already exists, return false indicating failure
+                return false;
             }
 
-            // Create a new role
             var role = new Role { Name = roleName };
-
-            // Add the role to the system
             var result = await _roleManager.CreateAsync(role);
 
-            return result.Succeeded; // Return true if the role creation was successful, false otherwise
+            return result.Succeeded;
+        }
+
+        public List<string> GetRoles()
+        {
+            return _roleManager.Roles.Select(r=> r.Name).ToList();
         }
     }
 }

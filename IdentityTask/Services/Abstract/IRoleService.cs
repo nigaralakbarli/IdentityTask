@@ -3,4 +3,5 @@
 public interface IRoleService
 {
     Task<bool> AddRoleAsync(string roleName);
+    List<string> GetRoles();
 }

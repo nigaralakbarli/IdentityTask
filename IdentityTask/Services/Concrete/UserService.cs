@@ -44,47 +44,42 @@ public class UserService : IUserService
 
     public async Task<bool> RemoveUserRoleAsync(UserRoleDTO userRoleDTO)
     {
-        // Find the user by ID
         var user = await _userManager.FindByIdAsync(userRoleDTO.UserId.ToString());
         if (user == null)
         {
-            return false; // User not found, return false indicating failure
+            return false; 
         }
 
         var roleName = _roleManager.Roles.FirstOrDefault(role => role.Id == userRoleDTO.RoleId)?.Name;
-        // Find the role by ID
-        var roles = await _userManager.GetRolesAsync(user);
-        if (roles == null || !roles.Contains(roleName))
+        var userRoles = await _userManager.GetRolesAsync(user);
+
+        if (roleName == null || !roleName.Contains(roleName))
         {
-            return false; // User does not have the role, return false indicating failure
+            return false; 
         }
 
-        // Remove the role from the user
         var result = await _userManager.RemoveFromRoleAsync(user, roleName);
 
-        return result.Succeeded; // Return true if the role removal was successful, false otherwise
+        return result.Succeeded; 
     }
 
     public async Task<bool> ChangePasswordAsync(ChangePasswordDTO changePasswordDTO)
     {
-        // Find the user by email
         var user = await _userManager.FindByEmailAsync(changePasswordDTO.Email);
         if (user == null)
         {
-            return false; // User not found, return false indicating failure
+            return false;
         }
 
-        // Verify the current password
         var isPasswordValid = await _userManager.CheckPasswordAsync(user, changePasswordDTO.CurrentPassword);
         if (!isPasswordValid)
         {
-            return false; // Current password is not valid, return false indicating failure
+            return false; 
         }
 
-        // Change the user's password
         var result = await _userManager.ChangePasswordAsync(user, changePasswordDTO.CurrentPassword, changePasswordDTO.NewPassword);
 
-        return result.Succeeded; // Return true if the password change was successful, false otherwise
+        return result.Succeeded; 
     }
 
 }

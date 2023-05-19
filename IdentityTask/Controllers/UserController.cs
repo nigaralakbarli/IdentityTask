@@ -19,7 +19,7 @@ namespace IdentityTask.Controllers
         }
 
 
-        [Route("AddRoleToUser")]
+        [Route("/AddRoleToUser")]
         [HttpPost]
         public async Task<IActionResult> AddRoleToUser(UserRoleDTO userRoleDTO)
         {
@@ -36,11 +36,10 @@ namespace IdentityTask.Controllers
         }
 
 
-        [Route("RemoveUserRole")]
+        [Route("/RemoveUserRole")]
         [HttpDelete]
         public async Task<IActionResult> RemoveUserRole(UserRoleDTO UserRoleDTO)
         {
-            // Remove the role from the user
             var result = await _userService.RemoveUserRoleAsync(UserRoleDTO);
             if (result)
             {
@@ -52,11 +51,10 @@ namespace IdentityTask.Controllers
             }
         }
 
-        [Route("ChangePassword")]
+        [Route("/ChangePassword")]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePasswordDTO changePasswordDTO)
         {
-            // Change the user's password
             var result = await _userService.ChangePasswordAsync(changePasswordDTO);
             if (result)
             {
