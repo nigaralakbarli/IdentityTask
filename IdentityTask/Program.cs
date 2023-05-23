@@ -69,7 +69,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddDbContext<AppDbContext>(options => { options.UseSqlServer(@"Data Source=DESKTOP-3QONI5I\SQLEXPRESS;Initial Catalog=IdentityTaskDB ;Integrated Security=True;TrustServerCertificate=True;"); });
+builder.Services.AddDbContext<AppDbContext>(options => { options.UseSqlServer(@"Data Source=DESKTOP-VDJMII7;Initial Catalog=IdentityTaskDB ;Integrated Security=True;TrustServerCertificate=True;"); });
 builder.Services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();

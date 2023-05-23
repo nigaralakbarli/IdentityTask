@@ -30,6 +30,16 @@ namespace IdentityTask.Services.Concrete
         {
             return _roleManager.Roles.Select(r=> r.Name).ToList();
         }
+
+        public Task<bool> HardDeleteUsersync(int roleId)
+        {
+         _roleManager.FindByIdAsync(int )
+        }
+
+        public Task<bool> SoftRemoveUser(int roleId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

@@ -3,6 +3,7 @@ using IdentityTask.DTOs.UserRoleDTO;
 using IdentityTask.Models;
 using IdentityTask.Services.Abstract;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Data;
 
 namespace IdentityTask.Services.Concrete;
@@ -72,6 +73,7 @@ public class UserService : IUserService
         }
 
         var isPasswordValid = await _userManager.CheckPasswordAsync(user, changePasswordDTO.CurrentPassword);
+
         if (!isPasswordValid)
         {
             return false; 
@@ -82,4 +84,45 @@ public class UserService : IUserService
         return result.Succeeded; 
     }
 
+    public async Task<bool> SoftRemoveUser(int userId)
+    {
+        User user = await _userManager.Users.SingleOrDefaultAsync(user => user.Id == userId);
+
+        if (user==null)
+        {
+            return false;
+        }
+
+        user.IsDeleted = true;
+     
+        
+        var result=await _userManager.UpdateAsync(user);
+
+        if (!result.Succeeded)
+        {
+            return false;
+        }
+
+        return true;    
+    }///
+
+    public async Task<bool> HardDeleteUsersync(int userId)
+    {
+        User user = await _userManager.Users.SingleOrDefaultAsync(user => user.Id == userId);
+
+        if (user == null)
+        {
+            return false;
+        }
+
+        var result=await _userManager.DeleteAsync(user);
+
+        if (!result.Succeeded)
+        {
+            return false;
+        }
+
+        return true;
+
+    }///
 }

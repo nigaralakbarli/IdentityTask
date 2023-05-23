@@ -9,4 +9,7 @@ public interface IUserService
     Task<bool> AddRoleToUserAsync(UserRoleDTO userRoleDTO);
     Task<bool> RemoveUserRoleAsync(UserRoleDTO userRoleDTO);
     Task<bool> ChangePasswordAsync(ChangePasswordDTO changePasswordDTO);
+    Task<bool> SoftRemoveUser(int userId);
+    Task<bool> HardDeleteUsersync(int userId);
+
 }

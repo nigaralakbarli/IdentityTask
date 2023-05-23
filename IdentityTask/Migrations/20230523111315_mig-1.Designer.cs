@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityTask.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230518070448_init")]
-    partial class init
+    [Migration("20230523111315_mig-1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
